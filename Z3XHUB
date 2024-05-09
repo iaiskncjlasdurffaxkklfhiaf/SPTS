@@ -1139,7 +1139,7 @@ Tabs.Visual:AddButton({
 		Skybox.SkyboxLf = "http://www.roblox.com/asset/?id=159454286"
 		Skybox.SkyboxRt = "http://www.roblox.com/asset/?id=159454300"
 		Skybox.SkyboxUp = "http://www.roblox.com/asset/?id=159454288"
-		Skybox.CelestialBodiesShown = falsev
+		Skybox.CelestialBodiesShown = false
 	end
 })
 Tabs.Visual:AddButton({
