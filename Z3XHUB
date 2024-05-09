@@ -1124,7 +1124,7 @@ Tabs.Visual:AddButton({
 	Title = "BetterSky",
 	Description = "",
 	Callback = function()
-		task.wait(0.2)
+		repeat task.wait(0) until game:IsLoaded()
 		local Skybox = Instance.new("Sky", game.Lighting)
 		Skybox.SkyboxBk = "http://www.roblox.com/asset/?id=159454299"
 		Skybox.SkyboxDn = "http://www.roblox.com/asset/?id=159454296"
