@@ -1124,14 +1124,7 @@ Tabs.Visual:AddButton({
 	Title = "BetterSky",
 	Description = "",
 	Callback = function()
-		game.Lighting:GetPropertyChangedSignal("TimeOfDay"):Connect(function() 
-			game.Lighting.TimeOfDay = 7 
-		end)
-
-		if game.Lighting:FindFirstChild("SunRays") then 
-			game.Lighting.SunRays:Destroy() 
-		end
-
+		task.wait(0.2)
 		local Skybox = Instance.new("Sky", game.Lighting)
 		Skybox.SkyboxBk = "http://www.roblox.com/asset/?id=159454299"
 		Skybox.SkyboxDn = "http://www.roblox.com/asset/?id=159454296"
@@ -1140,6 +1133,13 @@ Tabs.Visual:AddButton({
 		Skybox.SkyboxRt = "http://www.roblox.com/asset/?id=159454300"
 		Skybox.SkyboxUp = "http://www.roblox.com/asset/?id=159454288"
 		Skybox.CelestialBodiesShown = false
+		game.Lighting:GetPropertyChangedSignal("TimeOfDay"):Connect(function() 
+			game.Lighting.TimeOfDay = 7 
+		end)
+		task.wait(0.2)
+		if game.Lighting:FindFirstChild("SunRays") then 
+			game.Lighting.SunRays:Destroy() 
+		end
 	end
 })
 Tabs.Visual:AddButton({
