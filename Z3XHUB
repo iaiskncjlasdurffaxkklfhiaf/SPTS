@@ -1131,6 +1131,15 @@ Tabs.Settings:AddButton({
 		game:GetService("TeleportService"):TeleportToPlaceInstance(game.PlaceId, game.JobId, game.Players.LocalPlayer)
 	end
 })
+
+Tabs.Settings:AddButton({
+	Title = "IY",
+	Description = "",
+	Callback = function()
+		loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))()
+	end
+})
+
 Tabs.Visual:AddButton({
 	Title = "BetterSky",
 	Description = "",
@@ -2192,12 +2201,20 @@ local Keybind = Tabs.Settings:AddKeybind("Keybind", {
 	Mode = "Toggle",
 	Default = "F1",
 	Callback = function()
-		task.wait(0)
 		local pos = game.Players.LocalPlayer.Character:GetPrimaryPartCFrame()
 		game.ReplicatedStorage.RemoteEvent:FireServer({"Respawn"})
 		game.Players.LocalPlayer.Character:Destroy()
 		task.wait(1.7)
 		game.Players.LocalPlayer.Character:SetPrimaryPartCFrame(pos)
+	end
+})
+
+local Keybind = Tabs.Settings:AddKeybind("Keybind", {
+	Title = "FixResp",
+	Mode = "Toggle",
+	Default = "F2",
+	Callback = function()
+		game.ReplicatedStorage.RemoteEvent:FireServer({"Respawn"})
 	end
 })
 
