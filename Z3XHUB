@@ -2227,6 +2227,53 @@ local Input = Tabs.Settings:AddInput("Input", {
 InterfaceManager:SetLibrary(Fluent)
 InterfaceManager:BuildInterfaceSection(Tabs.Settings)
 
+local DailyQuests = game:GetService("Players").LocalPlayer.PlayerGui.ScreenGui.DailyQuestFrame
+local WeeklyQuests = game:GetService("Players").LocalPlayer.PlayerGui.ScreenGui.WeeklyQuestFrame
+while task.wait() do
+    for i,v in pairs(getconnections(DailyQuests.MaxFrame1.ClaimBtn.MouseButton1Click)) do
+        v.Function()
+    end
+    for i,v in pairs(getconnections(DailyQuests.MaxFrame2.ClaimBtn.MouseButton1Click)) do
+        v.Function()
+    end
+    for i,v in pairs(getconnections(DailyQuests.MaxFrame3.ClaimBtn.MouseButton1Click)) do
+        v.Function()
+    end
+    for i,v in pairs(getconnections(DailyQuests.MaxFrame4.ClaimBtn.MouseButton1Click)) do
+        v.Function()
+    end
+    for i,v in pairs(getconnections(DailyQuests.MaxFrame5.ClaimBtn.MouseButton1Click)) do
+        v.Function()
+    end
+    for i,v in pairs(getconnections(WeeklyQuests.MaxFrame1.ClaimBtn.MouseButton1Click)) do
+        v.Function()
+    end
+    for i,v in pairs(getconnections(WeeklyQuests.MaxFrame2.ClaimBtn.MouseButton1Click)) do
+        v.Function()
+    end
+    for i,v in pairs(getconnections(WeeklyQuests.MaxFrame3.ClaimBtn.MouseButton1Click)) do
+        v.Function()
+    end
+    for i,v in pairs(getconnections(WeeklyQuests.MaxFrame4.ClaimBtn.MouseButton1Click)) do
+        v.Function()
+    end
+    for i,v in pairs(getconnections(WeeklyQuests.MaxFrame5.ClaimBtn.MouseButton1Click)) do
+        v.Function()
+    end
+    for i,v in pairs(getconnections(WeeklyQuests.MaxFrame6.ClaimBtn.MouseButton1Click)) do
+        v.Function()
+    end
+    for i,v in pairs(getconnections(WeeklyQuests.MaxFrame7.ClaimBtn.MouseButton1Click)) do
+        v.Function()
+    end
+    for i,v in pairs(getconnections(WeeklyQuests.MaxFrame8.ClaimBtn.MouseButton1Click)) do
+        v.Function()
+    end
+    for i,v in pairs(getconnections(WeeklyQuests.MaxFrame9.ClaimBtn.MouseButton1Click)) do
+        v.Function()
+    end
+end
+
 if not getgenv().first then
 	getgenv().first = true
 	function PlayerJoined(text)
