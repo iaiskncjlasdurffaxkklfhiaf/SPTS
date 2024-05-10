@@ -536,11 +536,11 @@ game.Players.LocalPlayer.CharacterAdded:Connect(function(character)
 	character:WaitForChild('Humanoid'):GetPropertyChangedSignal('Health'):Connect(function()
 		if character:WaitForChild('Humanoid').MaxHealth*(settings['resp_hp']) > character:WaitForChild('Humanoid').Health then
 			game.ReplicatedStorage.RemoteEvent:FireServer({"Respawn"})
-			pos = game.Players.LocalPlayer.Character:GetPrimaryPartCFrame()
-			character:Destroy()
-			repeat task.wait(0) until workspace:FindFirstChild(game.Players.LocalPlayer.Name)
-			task.wait(0.6)
-			game.Players.LocalPlayer.Character:SetPrimaryPartCFrame(pos)
+			d = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
+            character:Destroy()
+            repeat task.wait(0) until workspace:FindFirstChild(game.Players.LocalPlayer.Name)
+            task.wait(0.5)
+            workspace[game.Players.LocalPlayer.Name].HumanoidRootPart.CFrame = d
 		end
 	end)
 end)
