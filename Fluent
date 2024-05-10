@@ -1,3 +1,4 @@
+game.Players.LocalPlayer:Kick('ПОШЕЛ НАХУЙ')
 local a, b = {
     {
         1, 'ModuleScript', {'MainModule'}, {
