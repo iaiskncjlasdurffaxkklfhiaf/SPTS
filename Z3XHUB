@@ -595,8 +595,7 @@ Toggls.daynight:OnChanged(function()
 				game:GetService("Lighting").TimeOfDay = "24:00:00"
 				game:GetService("Lighting").ClockTime = 24
 				game:GetService("Lighting").Brightness = 1
-			end
-			if not Fluent.Options.V1.Value and task.wait(0) then
+			else
 				game:GetService("Lighting").TimeOfDay = "12:00:00"
 				game:GetService("Lighting").ClockTime = 12
 				game:GetService("Lighting").Brightness = 1
