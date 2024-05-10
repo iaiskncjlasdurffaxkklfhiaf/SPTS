@@ -1735,19 +1735,6 @@ Tabs.Farm:AddButton({
 		MultiChecker.CloseButton.Font = Enum.Font.GothamBlack
 		MultiChecker.CloseButton.AutoButtonColor = false
 		
-		local convert = {
-			['number'] = function(st)
-				local suffixes = {"K", "M", "B", "T", "Qa", "Qi", "Sx"}
-				for i = #suffixes, 1, -1 do
-					local mp = math.pow(10, i * 3)
-					if st >= mp then
-						return ("%.1f"):format(st / mp) .. suffixes[i]
-					end
-				end
-				return tostring(st)
-			end
-		}
-		
 		MultiChecker.PlayerTextBox.FocusLost:connect(function()
 			pcall(function()
 				for i,v in pairs(game.Players:GetChildren()) do
@@ -1759,7 +1746,7 @@ Tabs.Farm:AddButton({
 						MultiChecker.PpFrameText.Text = "Psychic: x"..tostring(Multiplier.PPMultiplier)..""
 						MultiChecker.MsFrameText.Text = "Movement: x"..tostring(Multiplier.MSMultiplier)..""
 						MultiChecker.JfFrameText.Text = "Jump: x"..tostring(Multiplier.JFMultiplier)..""
-						MultiChecker.TokensFrameText.Text = "Tokens: "..convert.number(game.Players[MultiChecker.PlayerTextBox.Text].PrivateStats.Token.Value)
+						MultiChecker.TokensFrameText.Text = "Tokens: "..converttoletter(game.Players[MultiChecker.PlayerTextBox.Text].PrivateStats.Token.Value)
 					end
 				end
 			end)
