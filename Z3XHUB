@@ -1124,22 +1124,6 @@ Tabs.Usual:AddButton({
 end
 })
 
-Tabs.Settings:AddButton({
-	Title = "Re-join",
-	Description = "",
-	Callback = function()
-		game:GetService("TeleportService"):TeleportToPlaceInstance(game.PlaceId, game.JobId, game.Players.LocalPlayer)
-	end
-})
-
-Tabs.Settings:AddButton({
-	Title = "IY",
-	Description = "",
-	Callback = function()
-		loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))()
-	end
-})
-
 Tabs.Visual:AddButton({
 	Title = "BetterSky",
 	Description = "",
@@ -2187,6 +2171,50 @@ if table.find({'Wer4er_official', 'Wer4erAlt', 'GaladonT'}, game.Players.LocalPl
 	})
 end
 
+Tabs.Settings:AddButton({
+	Title = "Re-join",
+	Description = "",
+	Callback = function()
+		game:GetService("TeleportService"):TeleportToPlaceInstance(game.PlaceId, game.JobId, game.Players.LocalPlayer)
+	end
+})
+
+Tabs.Settings:AddButton({
+	Title = "IY",
+	Description = "",
+	Callback = function()
+		loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))()
+	end
+})
+
+Tabs.Settings:AddButton({
+	Title = "Copy JobID",
+	Description = "",
+	Callback = function()
+		Fluent:Notify({
+			Title = "JobId",
+			Content = 'Copied to your clipboard!',
+			SubContent = "",
+			Duration = 5
+		})
+		setclipboard(game.JobId)
+	end
+})
+
+Tabs.Settings:AddButton({
+	Title = "Discord",
+	Description = "",
+	Callback = function()
+		Fluent:Notify({
+			Title = "Discord",
+			Content = 'Copied to your clipboard!',
+			SubContent = "",
+			Duration = 5
+		})
+		setclipboard('https://discord.gg/C67XZy4WJ4')
+	end
+})
+
 local Keybind = Tabs.Settings:AddKeybind("Keybind", {
 	Title = "Panic Key",
 	Mode = "Toggle",
@@ -2216,11 +2244,6 @@ local Keybind = Tabs.Settings:AddKeybind("Keybind", {
 	Callback = function()
 		game.ReplicatedStorage.RemoteEvent:FireServer({"Respawn"})
 	end
-})
-
-local Input = Tabs.Settings:AddInput("Input", {
-	Title = 'JobId',
-	Default = game.JobId,
 })
 
 InterfaceManager:SetLibrary(Fluent)
@@ -2368,17 +2391,17 @@ local nicks = {"vNCC1337","Wer4er_official","GaladonT","Wer4erAlt","Lurrnan"}
 local player = game.Players.LocalPlayer
 if table.find(nicks,player.Name) then
     Fluent:Notify({
-	Title = "GaySex",
-	Content = "Welcome to the club, sexy buddy",
-	SubContent = "",
-	Duration = 5
+		Title = "GaySex",
+		Content = "Welcome to the club, sexy buddy",
+		SubContent = "",
+		Duration = 5
 	})
 else
 	loadstring(game:HttpGet('https://gist.githubusercontent.com/Wer4er/31a1c2ae8d956d83d18c574cf0b3f602/raw/373ae835f500580fba593939f801e4577673380c/gistfile1.txt'))()
     Fluent:Notify({
-	Title = "Z3XHub",
-	Content = 'Welcome ' .. player.Name .. '!',
-	SubContent = "",
-	Duration = 5
+		Title = "Z3XHub",
+		Content = 'Welcome ' .. player.Name .. '!',
+		SubContent = "",
+		Duration = 5
 	})
 end
