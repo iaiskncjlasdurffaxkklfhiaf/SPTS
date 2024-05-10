@@ -985,19 +985,11 @@ Tabs.Farm:AddButton({
 	token.Size = UDim2.new(0, 120, 0, 40)
 	token.Font = Enum.Font.SourceSansBold
 	token.Text = "Token : "
-	token.TextColor3 = Color3.fromRGB(0,0,0)
+	token.TextColor3 = Color3.fromRGB(255, 255, 255)
 	token.TextScaled = true
 	token.TextSize = 14.000
 	token.TextWrapped = true
 	token.TextXAlignment = Enum.TextXAlignment.Left
-	local suffixes = {"", "K", "M", "B", "T", "Qa", "Qi"}
-	local function format(val)
-		for i = 1, #suffixes do
-			if tonumber(val) < 10 ^ (i * 3) then
-				return math.floor(val / ((10 ^ ((i - 1) * 3)) / 100)) / (100) .. suffixes[i]
-			end
-		end
-	end
 	
 	local FSV1 = game.Players.LocalPlayer.PrivateStats.FistStrength.Value
 	local BTV1 = game.Players.LocalPlayer.PrivateStats.BodyToughness.Value
@@ -1017,12 +1009,12 @@ Tabs.Farm:AddButton({
 				local speed2 = game.Players.LocalPlayer.PrivateStats.MovementSpeed.Value
 				local jump2 = game.Players.LocalPlayer.PrivateStats.JumpForce.Value
 				local Token2 = game.Players.LocalPlayer.PrivateStats.Token.Value
-				fs.Text = "Fist : " .. format(fs2 - FSV1)
-				bt.Text = "Body : " .. format(bt2 - BTV1)
-				pp.Text = "Psychic : " .. format(pp2 - PPV1)
-				speed.Text = "Speed : " .. format(speed2 - SPEEDV1)
-				jump.Text = "Jump : " .. format(jump2 - JUMPV1)
-				token.Text = "Token : " .. format(Token2 - Token1)
+				fs.Text = "Fist : " .. converttoletter(fs2 - FSV1)
+				bt.Text = "Body : " .. converttoletter(bt2 - BTV1)
+				pp.Text = "Psychic : " .. converttoletter(pp2 - PPV1)
+				speed.Text = "Speed : " .. converttoletter(speed2 - SPEEDV1)
+				jump.Text = "Jump : " .. converttoletter(jump2 - JUMPV1)
+				token.Text = "Token : " .. converttoletter(Token2 - Token1)
 			end
 		end
 	end
@@ -1124,7 +1116,7 @@ Tabs.Visual:AddButton({
 	Title = "BetterSky",
 	Description = "",
 	Callback = function()
-		repeat task.wait(0) until game:IsLoaded()
+		task.wait(0)
 		local Skybox = Instance.new("Sky", game.Lighting)
 		Skybox.SkyboxBk = "http://www.roblox.com/asset/?id=159454299"
 		Skybox.SkyboxDn = "http://www.roblox.com/asset/?id=159454296"
@@ -1133,6 +1125,7 @@ Tabs.Visual:AddButton({
 		Skybox.SkyboxRt = "http://www.roblox.com/asset/?id=159454300"
 		Skybox.SkyboxUp = "http://www.roblox.com/asset/?id=159454288"
 		Skybox.CelestialBodiesShown = false
+		task.wait(0.2)
 		game.Lighting:GetPropertyChangedSignal("TimeOfDay"):Connect(function() 
 			game.Lighting.TimeOfDay = 7 
 		end)
