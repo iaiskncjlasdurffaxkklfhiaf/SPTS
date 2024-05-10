@@ -8,9 +8,9 @@ end)
 
 for i, v in pairs(game:GetService('Players'):GetChildren()) do
 	if v ~= game.Players.LocalPlayer then
-		for i2, v2 in pairs(v:GetChildren()) do
-			if v2.Name == 'LocalSoundFolder' then
-				v2:Destroy()
+		for i2, U2 in pairs(v:GetChildren()) do
+			if U2.Name == 'LocalSoundFolder' then
+				U2:Destroy()
 			end
 		end
 	end
@@ -28,9 +28,9 @@ game:GetService('Players').PlayerAdded:Connect(function()
 	task.wait(1)
 	for i, v in pairs(game:GetService('Players'):GetChildren()) do
 		if v ~= game.Players.LocalPlayer then
-			for i2, v2 in pairs(v:GetChildren()) do
-				if v2.Name == 'LocalSoundFolder' then
-					v2:Destroy()
+			for i2, U2 in pairs(v:GetChildren()) do
+				if U2.Name == 'LocalSoundFolder' then
+					U2:Destroy()
 				end
 			end
 		end
@@ -133,7 +133,7 @@ if not workspace:FindFirstChild('ESPFolder') then
 	local espfolder = Instance.new('Folder', workspace)
 	espfolder.Name = "ESPFolder"
 	espfolder.ChildAdded:Connect(function(child)
-		if not Fluent.Options.V5.Value then
+		if not Fluent.Options.U5.Value then
 			task.wait()
 			child:Destroy()
 		end
@@ -366,9 +366,10 @@ local Window = Fluent:CreateWindow({
 local Tabs = {
 	Farm = Window:AddTab({ Title = "Farm & More", Icon = "axe" }),
 	Visual = Window:AddTab({ Title = "Visual", Icon = "plus-circle" }),
-	Pvp = Window:AddTab({ Title = "Pvp", Icon = "swords" }),
-	Teleports = Window:AddTab({ Title = "Teleports", Icon = "navigation-2" }),
+	Usual = Window:AddTab({ Title = "Usual", Icon = "star" }),
 	Fun = Window:AddTab({ Title = "Fun", Icon = "smile-plus" }),
+	Teleports = Window:AddTab({ Title = "Teleports", Icon = "navigation-2" }),
+	Pvp = Window:AddTab({ Title = "Pvp", Icon = "swords" }),
 	Settings = Window:AddTab({ Title = "Settings", Icon = "settings" }),
 };
 
@@ -441,11 +442,13 @@ local Toggls = {
 	bt = Tabs.Farm:AddToggle("F2", { Title = "Body Toughness", Default = false }),
 	pp = Tabs.Farm:AddToggle("F3", { Title = "Psychic Power", Default = false }),
 	js = Tabs.Farm:AddToggle("F4", { Title = "Jump & Speed", Default = false }),
-	bball = Tabs.Visual:AddToggle("V1", { Title = "Black Balls", Default = false }),
-	rball = Tabs.Visual:AddToggle("V2", { Title = "RGB Balls", Default = false }),
-	blaser = Tabs.Visual:AddToggle("V3", { Title = "Black Laser", Default = false }),
-	rlaser = Tabs.Visual:AddToggle("V4", { Title = "RGB Laser", Default = false }),
-	esp = Tabs.Visual:AddToggle("V5", { Title = "ESP", Default = false }),
+	bball = Tabs.Usual:AddToggle("U1", { Title = "Black Balls", Default = false }),
+	rball = Tabs.Usual:AddToggle("U2", { Title = "RGB Balls", Default = false }),
+	blaser = Tabs.Usual:AddToggle("U3", { Title = "Black Laser", Default = false }),
+	rlaser = Tabs.Usual:AddToggle("U4", { Title = "RGB Laser", Default = false }),
+	esp = Tabs.Usual:AddToggle("U5", { Title = "ESP", Default = false }),
+	superaura = Tabs.Usual:AddToggle("U6", { Title = "Super Aura", Default = false }),
+	offaura = Tabs.Usual:AddToggle("U7", { Title = "Auto Disable Aura", Default = false }),
 	autoc = Tabs.Pvp:AddToggle("P1", { Title = "Auto C", Default = false }),
 	spamr = Tabs.Pvp:AddToggle("P2", { Title = "Stack", Default = false }),
 	soulat = Tabs.Pvp:AddToggle("P3", { Title = "Soul Attack", Default = false }),
@@ -463,8 +466,6 @@ local Toggls = {
 	lag4 = Tabs.Fun:AddToggle("FUN4", { Title = "Lag Server UltraFast", Default = false }),
 	onoffaura = Tabs.Fun:AddToggle("FUN5", { Title = "On/Off Aura", Default = false }),
 	invis = Tabs.Fun:AddToggle("FUN6", { Title = "Invisible", Default = false }), 
-	superaura = Tabs.Fun:AddToggle("FUN7", { Title = "Super Aura", Default = false }),
-	offaura = Tabs.Fun:AddToggle("FUN8", { Title = "Auto Disable Aura", Default = false }),
 	rgbr = Tabs.Fun:AddToggle("FUN9", { Title = "RGB Rank", Default = false }),
 	rgbw = Tabs.Fun:AddToggle("FUN10", { Title = "RGB Weight", Default = false }),
 	rejoin = Tabs.Settings:AddToggle("S1", { Title = "Auto Re-Join", Default = false }),
@@ -545,7 +546,7 @@ game.Players.LocalPlayer.CharacterAdded:Connect(function(character)
 end)
 
 Toggls.blaser:OnChanged(function()
-	while Fluent.Options.V3.Value and task.wait(0) do
+	while Fluent.Options.U3.Value and task.wait(0) do
 		pcall(function()
 			for _, v in pairs(workspace:GetChildren()) do
 				if v.Name == "Part" then
@@ -558,7 +559,7 @@ Toggls.blaser:OnChanged(function()
 end)
 
 Toggls.rlaser:OnChanged(function()
-	while Fluent.Options.V4.Value and task.wait(0) do
+	while Fluent.Options.U4.Value and task.wait(0) do
 		pcall(function()
 			for _, v in pairs(workspace:GetChildren()) do
 				if v.Name == "Part" then
@@ -571,7 +572,7 @@ Toggls.rlaser:OnChanged(function()
 end)
 
 Toggls.esp:OnChanged(function()
-	if Fluent.Options.V5.Value then
+	if Fluent.Options.U5.Value then
 		for _, v in next, Plrs:GetPlayers() do
 			spawn(function()
 				if v ~= MyPlr then
@@ -863,7 +864,7 @@ end)
 
 --//Sliders
 local Sliders = {
-	fov = Tabs.Visual:AddSlider("Slider", {Title = "FOV",Description = "",Default = 70,Min = 1,Max = 120,Rounding = 1});
+	fov = Tabs.Usual:AddSlider("Slider", {Title = "FOV",Description = "",Default = 70,Min = 1,Max = 120,Rounding = 1});
 }; 
 
 --// functions sliders
@@ -1918,7 +1919,7 @@ Tabs.Fun:AddButton({
 	end
 })
 
-Tabs.Fun:AddButton({
+Tabs.Usual:AddButton({
 	Title = "ChatSPY",
 	Description = "",
 	Callback = function()
@@ -2260,7 +2261,7 @@ if not getgenv().first then
 				end)
 				v.CharacterAdded:Connect(function(char)
 					spawn(function()
-						if Fluent.Options.V5.Value then
+						if Fluent.Options.U5.Value then
 							CreateESP(char)
 						end
 					end)
@@ -2272,7 +2273,7 @@ if not getgenv().first then
 		PlayerJoined(player.DisplayName .. " (@" .. player.Name .. ") Has joined")
 		player.CharacterAdded:Connect(function(char)
 			spawn(function()
-				if Fluent.Options.V5.Value then
+				if Fluent.Options.U5.Value then
 					CreateESP(char)
 				end
 			end)
@@ -2327,11 +2328,11 @@ end
 
 workspace.Storage.ChildAdded:Connect(function(child)
 	task.wait(0)
-	if Fluent.Options.V1.Value then
+	if Fluent.Options.U1.Value then
 		child.Color = Color3.fromHSV(0,0,0)
 		child.Transparency = 0
 	end
-	if Fluent.Options.V2.Value then  
+	if Fluent.Options.U2.Value then  
 		while task.wait(0) do
 			child.Color = Color3.fromHSV(tick() % 5 / 5, 1, 1)
 			child.Transparency = 0
@@ -2346,6 +2347,7 @@ game:GetService("Players").LocalPlayer.Idled:connect(function()
     task.wait(1)
     game:GetService("VirtualUser"):Button2Up(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
 end) 
+
 local nicks = {"vNCC1337","Wer4er_official","GaladonT","Wer4erAlt"}
 local player = game.Players.LocalPlayer
 if table.find(nicks,player.Name) then
