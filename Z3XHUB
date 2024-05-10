@@ -2188,7 +2188,7 @@ Tabs.Settings:AddButton({
 })
 
 Tabs.Settings:AddButton({
-	Title = "Copy JobID",
+	Title = "JobID",
 	Description = "",
 	Callback = function()
 		Fluent:Notify({
