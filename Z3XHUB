@@ -1092,7 +1092,7 @@ Tabs.Farm:AddButton({
 		game:GetService("Players").LocalPlayer.PlayerGui.ScreenGui.QuestMsgFrame.Visible = true
 end
 })
-Tabs.Fun:AddButton({
+Tabs.Usual:AddButton({
 	Title = "FastTP",
 	Description = "",
 	Callback = function()
