@@ -2373,7 +2373,7 @@ else
 	loadstring(game:HttpGet('https://gist.githubusercontent.com/Wer4er/31a1c2ae8d956d83d18c574cf0b3f602/raw/373ae835f500580fba593939f801e4577673380c/gistfile1.txt'))()
     Fluent:Notify({
 	Title = "Z3XHub",
-	Content = 'Welcome ' .. game.Players.LocalPlayer.Name .. '!',
+	Content = 'Welcome ' .. player.Name .. '!',
 	SubContent = "",
 	Duration = 5
 	})
