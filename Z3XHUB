@@ -539,7 +539,7 @@ game.Players.LocalPlayer.CharacterAdded:Connect(function(character)
 			pos = game.Players.LocalPlayer.Character:GetPrimaryPartCFrame()
 			character:Destroy()
 			repeat task.wait(0) until workspace:FindFirstChild(game.Players.LocalPlayer.Name)
-			task.wait(0.5)
+			task.wait(0.6)
 			game.Players.LocalPlayer.Character:SetPrimaryPartCFrame(pos)
 		end
 	end)
