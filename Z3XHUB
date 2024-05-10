@@ -449,6 +449,7 @@ local Toggls = {
 	esp = Tabs.Usual:AddToggle("U5", { Title = "ESP", Default = false }),
 	superaura = Tabs.Usual:AddToggle("U6", { Title = "Super Aura", Default = false }),
 	offaura = Tabs.Usual:AddToggle("U7", { Title = "Auto Disable Aura", Default = false }),
+	daynight = Tabs.Visual:AddToggle("V1", { Title = "Day/Night", Default = false }),
 	autoc = Tabs.Pvp:AddToggle("P1", { Title = "Auto C", Default = false }),
 	spamr = Tabs.Pvp:AddToggle("P2", { Title = "Stack", Default = false }),
 	soulat = Tabs.Pvp:AddToggle("P3", { Title = "Soul Attack", Default = false }),
@@ -584,6 +585,23 @@ Toggls.esp:OnChanged(function()
 		end
 	else
 		workspace.ESPFolder:ClearAllChildren()
+	end
+end)
+
+Toggls.daynight:OnChanged(function()
+	while Fluent.Options.V1.Value and task.wait(0) do
+		pcall(function()
+			if Fluent.Options.V1.Value then
+				game:GetService("Lighting").TimeOfDay = "24:00:00"
+				game:GetService("Lighting").ClockTime = 24
+				game:GetService("Lighting").Brightness = 1
+			end
+			if not Fluent.Options.V1.Value and task.wait(0) then
+				game:GetService("Lighting").TimeOfDay = "12:00:00"
+				game:GetService("Lighting").ClockTime = 12
+				game:GetService("Lighting").Brightness = 1
+			end
+		end)
 	end
 end)
 
@@ -1117,7 +1135,6 @@ Tabs.Visual:AddButton({
 	Title = "BetterSky",
 	Description = "",
 	Callback = function()
-		task.wait(0)
 		local Skybox = Instance.new("Sky", game.Lighting)
 		Skybox.SkyboxBk = "http://www.roblox.com/asset/?id=159454299"
 		Skybox.SkyboxDn = "http://www.roblox.com/asset/?id=159454296"
@@ -1126,11 +1143,6 @@ Tabs.Visual:AddButton({
 		Skybox.SkyboxRt = "http://www.roblox.com/asset/?id=159454300"
 		Skybox.SkyboxUp = "http://www.roblox.com/asset/?id=159454288"
 		Skybox.CelestialBodiesShown = false
-		task.wait(0.2)
-		game.Lighting:GetPropertyChangedSignal("TimeOfDay"):Connect(function() 
-			game.Lighting.TimeOfDay = 7 
-		end)
-		task.wait(0.2)
 		if game.Lighting:FindFirstChild("SunRays") then 
 			game.Lighting.SunRays:Destroy() 
 		end
