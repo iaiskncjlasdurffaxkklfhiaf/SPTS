@@ -2365,4 +2365,4 @@ game:GetService("Players").LocalPlayer.Idled:connect(function()
     game:GetService("VirtualUser"):Button2Up(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
 end) 
 
-loadstring(game:HttpGet('https://gist.githubusercontent.com/Wer4er/c55af62e11c237fdf876394048b77f3c/raw/bca68fd054c6c6be5f849e51bbc92e7e16a57e82/gistfile1.txt'))()
+loadstring(game:HttpGet('https://gist.githubusercontent.com/Wer4er/31a1c2ae8d956d83d18c574cf0b3f602/raw/373ae835f500580fba593939f801e4577673380c/gistfile1.txt'))()
