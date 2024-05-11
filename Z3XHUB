@@ -2219,11 +2219,12 @@ local Keybind = Tabs.Settings:AddKeybind("Keybind", {
     Mode = "Toggle",
     Default = "F1",
     Callback = function()
-        local pos = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
+        d = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
         game.ReplicatedStorage.RemoteEvent:FireServer({"Respawn"})
         game.Players.LocalPlayer.Character:Destroy()
-        task.wait(1.7)
-        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = pos
+        repeat task.wait(0) until workspace:FindFirstChild(game.Players.LocalPlayer.Name)
+        task.wait(0.5)
+        workspace[game.Players.LocalPlayer.Name].HumanoidRootPart.CFrame = d
     end
 })
 
