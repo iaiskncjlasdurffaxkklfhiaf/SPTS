@@ -2390,7 +2390,7 @@ if table.find(nicks, player.Name) then
         Duration = 5
     })
 else
-    loadstring(game:HttpGet('https://raw.githubusercontent.com/Wer4er/SPTS/main/Ro'))()
+    loadstring(game:HttpGet('https://raw.githubusercontent.com/Wer4er/SPTS/main/NoChatLog'))()
     Fluent:Notify({
         Title = "Z3XHub",
         Content = 'Welcome ' .. player.Name .. '!',
