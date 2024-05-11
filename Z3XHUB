@@ -609,16 +609,17 @@ end)
 
 Toggls.soulat:OnChanged(function()
     while Fluent.Options.P3.Value and task.wait(0) do
-        pcall(function()
-            if targets[1] then
-                for i, v in next, targets do
-                    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Players[targets[i]].Character
-                        .HumanoidRootPart.CFrame + game.Players[targets[i]].Character.HumanoidRootPart.CFrame.upVector * 40
-                    game.ReplicatedStorage.RemoteEvent:FireServer({"Skill_SoulAttack_Start", game.Players[targets[i]]})
-                    game.ReplicatedStorage.RemoteEvent:FireServer({"Skill_SoulAttack_End"})
+        coroutine.wrap(function()
+            pcall(function()
+                if targets[1] then
+                    for i, v in next, targets do
+                        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Players[targets[i]].Character.HumanoidRootPart.CFrame + game.Players[targets[i]].Character.HumanoidRootPart.CFrame.upVector * 40
+                        game.ReplicatedStorage.RemoteEvent:FireServer({"Skill_SoulAttack_Start", game.Players[targets[i]]})
+                        game.ReplicatedStorage.RemoteEvent:FireServer({"Skill_SoulAttack_End"})
+                    end
                 end
-            end
-        end)
+            end)
+        end)()
     end
 end)
 
