@@ -437,7 +437,7 @@ local Toggls = {
     spamtp = Tabs.Pvp:AddToggle("P8", {Title = "Spam TP", Default = false}),
     stackall = Tabs.Pvp:AddToggle("P9", {Title = "Stack All", Default = false}),
     soulrall = Tabs.Pvp:AddToggle("P10", {Title = "Soul Reap All", Default = false}),
-    ppall = Tabs.Pvp:AddToggle("P11", {Title = "PP All", Default = false}),
+    ppall = Tabs.Pvp:AddToggle("P11", {Title = "Soul Attack All", Default = false}),
     lag1 = Tabs.Fun:AddToggle("FUN1", {Title = "Lag Server Slow", Default = false}),
     lag2 = Tabs.Fun:AddToggle("FUN2", {Title = "Lag Server Normal", Default = false}),
     lag3 = Tabs.Fun:AddToggle("FUN3", {Title = "Lag Server Fast", Default = false}),
