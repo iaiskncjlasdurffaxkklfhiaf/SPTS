@@ -391,6 +391,7 @@ Tabs.Pvp:AddButton({
         })
     end
 })
+
 Tabs.Pvp:AddButton({
     Title = "Remove",
     Description = "",
