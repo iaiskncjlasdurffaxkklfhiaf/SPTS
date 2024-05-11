@@ -875,118 +875,131 @@ Tabs.Farm:AddButton({
     Title = "StatCounter",
     Description = "",
     Callback = function()
-        for i, v in next, game.Players.LocalPlayer.PlayerGui.Fluent:GetChildren() do
-            if v.Name == "statplus" then
-                v:Destroy()
-            end
-        end
-        local statplus = Instance.new("ScreenGui")
-        local Frame = Instance.new("Frame")
-        local Frame = Instance.new("Frame")
-        local fs = Instance.new("TextLabel")
-        local UICorner = Instance.new("UICorner")
-        local bt = Instance.new("TextLabel")
-        local pp = Instance.new("TextLabel")
-        local speed = Instance.new("TextLabel")
-        local jump = Instance.new("TextLabel")
-        local token = Instance.new("TextLabel")
-        
-        statplus.Name = "statplus"
-        statplus.Parent = game.Players.LocalPlayer.PlayerGui.Fluent
-        statplus.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
-        statplus.ResetOnSpawn = false
-        
-        Frame.Parent = statplus
-        Frame.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-        Frame.BackgroundTransparency = 0
-        Frame.Position = UDim2.new(0, 0, 0.4, 0)
-        Frame.Size = UDim2.new(0, 150, 0, 200)
-        
-        fs.Name = "fs"
-        fs.Parent = Frame
-        fs.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-        fs.BackgroundTransparency = 1.000
-        fs.Position = UDim2.new(0, 0, 0, 0)
-        fs.Size = UDim2.new(0, 100, 0, 40)
-        fs.Font = Enum.Font.SourceSansBold
-        fs.Text = "Fist : "
-        fs.TextColor3 = Color3.fromRGB(255, 255, 255)
-        fs.TextScaled = true
-        fs.TextSize = 14.000
-        fs.TextWrapped = true
-        fs.TextXAlignment = Enum.TextXAlignment.Left
-        
-        UICorner.Parent = Frame
-        
-        bt.Name = "bt"
-        bt.Parent = Frame
-        bt.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-        bt.BackgroundTransparency = 1.000
-        bt.Position = UDim2.new(0, 0, 0.15, 0)
-        bt.Size = UDim2.new(0, 120, 0, 40)
-        bt.Font = Enum.Font.SourceSansBold
-        bt.Text = "Body : "
-        bt.TextColor3 = Color3.fromRGB(255, 255, 255)
-        bt.TextScaled = true
-        bt.TextSize = 14.000
-        bt.TextWrapped = true
-        bt.TextXAlignment = Enum.TextXAlignment.Left
-        
-        pp.Name = "pp"
-        pp.Parent = Frame
-        pp.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-        pp.BackgroundTransparency = 1.000
-        pp.Position = UDim2.new(0, 0, 0.3, 0)
-        pp.Size = UDim2.new(0, 120, 0, 40)
-        pp.Font = Enum.Font.SourceSansBold
-        pp.Text = "Psychic : "
-        pp.TextColor3 = Color3.fromRGB(255, 255, 255)
-        pp.TextScaled = true
-        pp.TextSize = 14.000
-        pp.TextWrapped = true
-        pp.TextXAlignment = Enum.TextXAlignment.Left
-        
-        speed.Name = "speed"
-        speed.Parent = Frame
-        speed.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-        speed.BackgroundTransparency = 1.000
-        speed.Position = UDim2.new(0, 0, 0.45, 0)
-        speed.Size = UDim2.new(0, 120, 0, 40)
-        speed.Font = Enum.Font.SourceSansBold
-        speed.Text = "Speed : "
-        speed.TextColor3 = Color3.fromRGB(255, 255, 255)
-        speed.TextScaled = true
-        speed.TextSize = 14.000
-        speed.TextWrapped = true
-        speed.TextXAlignment = Enum.TextXAlignment.Left
-        
-        jump.Name = "jump"
-        jump.Parent = Frame
-        jump.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-        jump.BackgroundTransparency = 1.000
-        jump.Position = UDim2.new(0, 0, 0.6, 0)
-        jump.Size = UDim2.new(0, 120, 0, 40)
-        jump.Font = Enum.Font.SourceSansBold
-        jump.Text = "Jump : "
-        jump.TextColor3 = Color3.fromRGB(255, 255, 255)
-        jump.TextScaled = true
-        jump.TextSize = 14.000
-        jump.TextWrapped = true
-        jump.TextXAlignment = Enum.TextXAlignment.Left
-        
-        token.Name = "token"
-        token.Parent = Frame
-        token.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-        token.BackgroundTransparency = 1.000
-        token.Position = UDim2.new(0, 0, 0.75, 0)
-        token.Size = UDim2.new(0, 120, 0, 40)
-        token.Font = Enum.Font.SourceSansBold
-        token.Text = "Token : "
-        token.TextColor3 = Color3.fromRGB(255, 255, 255)
-        token.TextScaled = true
-        token.TextSize = 14.000
-        token.TextWrapped = true
-        token.TextXAlignment = Enum.TextXAlignment.Left
+		local StatCounter = Instance.new("ScreenGui")
+		local Frame = Instance.new("Frame")
+		local UICorner = Instance.new("UICorner")
+		local Fist = Instance.new("TextLabel")
+		local UICorner_2 = Instance.new("UICorner")
+		local Body = Instance.new("TextLabel")
+		local UICorner_3 = Instance.new("UICorner")
+		local Psychic = Instance.new("TextLabel")
+		local UICorner_4 = Instance.new("UICorner")
+		local Speed = Instance.new("TextLabel")
+		local UICorner_5 = Instance.new("UICorner")
+		local Jump = Instance.new("TextLabel")
+		local UICorner_6 = Instance.new("UICorner")
+		local Token = Instance.new("TextLabel")
+		local UICorner_7 = Instance.new("UICorner")
+		local CloseBut = Instance.new("TextButton")
+
+		StatCounter.Name = "StatCounter"
+        StatCounter.Parent = game.Players.LocalPlayer.PlayerGui.Fluent
+        StatCounter.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+        StatCounter.ResetOnSpawn = false
+
+		Frame.Parent = StatCounter
+		Frame.Active = false
+		Frame.BackgroundColor3 = Color3.fromRGB(76, 76, 74)
+		Frame.BackgroundTransparency = 1
+		Frame.BorderColor3 = Color3.fromRGB(0, 0, 0)
+		Frame.BorderSizePixel = 0
+		Frame.Position = UDim2.new(0, 0, 0.2, 0)
+		Frame.Size = UDim2.new(0, 100, 0, 200)
+
+		UICorner.Parent = Frame
+
+		Fist.Name = "Fist"
+		Fist.Parent = Frame
+		Fist.BackgroundColor3 = Color3.fromRGB(0,0,0)
+		Fist.BorderColor3 = Color3.fromRGB(0, 0, 0)
+		Fist.BorderSizePixel = 0
+		Fist.Position = UDim2.new(0, 0, 0, 0)
+		Fist.Size = UDim2.new(0, 100, 0, 40)
+		Fist.Font = Enum.Font.SourceSans
+		Fist.TextColor3 = Color3.fromRGB(255,255,255)
+		Fist.TextSize = 16
+
+		UICorner_2.Parent = Fist
+
+		Body.Name = "Body"
+		Body.Parent = Frame
+		Body.BackgroundColor3 = Color3.fromRGB(0,0,0)
+		Body.BorderColor3 = Color3.fromRGB(0, 0, 0)
+		Body.BorderSizePixel = 0
+		Body.Position = UDim2.new(0, 0, 0.15, 0)
+		Body.Size = UDim2.new(0, 100, 0, 40)
+		Body.Font = Enum.Font.SourceSans
+		Body.TextColor3 = Color3.fromRGB(255,255,255)
+		Body.TextSize = 16
+
+		UICorner_3.Parent = Body
+
+		Psychic.Name = "Psychic"
+		Psychic.Parent = Frame
+		Psychic.BackgroundColor3 = Color3.fromRGB(0,0,0)
+		Psychic.BorderColor3 = Color3.fromRGB(0, 0, 0)
+		Psychic.BorderSizePixel = 0
+		Psychic.Position = UDim2.new(0, 0, 0.3, 0)
+		Psychic.Size = UDim2.new(0, 100, 0, 40)
+		Psychic.Font = Enum.Font.SourceSans
+		Psychic.TextColor3 = Color3.fromRGB(255,255,255)
+		Psychic.TextSize = 16
+
+		UICorner_4.Parent = Psychic
+
+		Speed.Name = "Speed"
+		Speed.Parent = Frame
+		Speed.BackgroundColor3 = Color3.fromRGB(0,0,0)
+		Speed.BorderColor3 = Color3.fromRGB(0, 0, 0)
+		Speed.BorderSizePixel = 0
+		Speed.Position = UDim2.new(0, 0, 0.45, 0)
+		Speed.Size = UDim2.new(0, 100, 0, 40)
+		Speed.Font = Enum.Font.SourceSans
+		Speed.TextColor3 = Color3.fromRGB(255,255,255)
+		Speed.TextSize = 16
+
+		UICorner_5.Parent = Speed
+
+		Jump.Name = "Jump"
+		Jump.Parent = Frame
+		Jump.BackgroundColor3 = Color3.fromRGB(0,0,0)
+		Jump.BorderColor3 = Color3.fromRGB(0, 0, 0)
+		Jump.BorderSizePixel = 0
+		Jump.Position = UDim2.new(0, 0, 0.6, 0)
+		Jump.Size = UDim2.new(0, 100, 0, 40)
+		Jump.Font = Enum.Font.SourceSans
+		Jump.TextColor3 = Color3.fromRGB(255,255,255)
+		Jump.TextSize = 16
+
+		UICorner_6.Parent = Jump
+
+		Token.Name = "Token"
+		Token.Parent = Frame
+		Token.BackgroundColor3 = Color3.fromRGB(0,0,0)
+		Token.BorderColor3 = Color3.fromRGB(0, 0, 0)
+		Token.BorderSizePixel = 0
+		Token.Position = UDim2.new(0, 0, 0.75, 0)
+		Token.Size = UDim2.new(0, 100, 0, 40)
+		Token.Font = Enum.Font.SourceSans
+		Token.TextColor3 = Color3.fromRGB(255,255,255)
+		Token.TextSize = 16
+
+		UICorner_7.Parent = Token
+
+		CloseBut.Name = "CloseBut"
+        CloseBut.Parent = Frame
+        CloseBut.AnchorPoint = Vector2.new(0.5, 0.5)
+        CloseBut.BackgroundColor3 = Color3.fromRGB(10, 10, 10)
+        CloseBut.BackgroundTransparency = 1
+        CloseBut.Position = UDim2.new(1, 0, 0, 0)
+        CloseBut.Size = UDim2.new(0.1, 0, 0.15, 0)
+        CloseBut.Active = false
+        CloseBut.Text = "X"
+		CloseBut.TextColor3 = Color3.fromRGB(100, 100, 100)
+		CloseBut.TextSize = 24
+		CloseBut.Font = Enum.Font.GothamBlack
+		CloseBut.AutoButtonColor = false
+
         
         local FSV1 = game.Players.LocalPlayer.PrivateStats.FistStrength.Value
         local BTV1 = game.Players.LocalPlayer.PrivateStats.BodyToughness.Value
@@ -1006,16 +1019,19 @@ Tabs.Farm:AddButton({
                     local speed2 = game.Players.LocalPlayer.PrivateStats.MovementSpeed.Value
                     local jump2 = game.Players.LocalPlayer.PrivateStats.JumpForce.Value
                     local Token2 = game.Players.LocalPlayer.PrivateStats.Token.Value
-                    fs.Text = "Fist : " .. converttoletter(fs2 - FSV1)
-                    bt.Text = "Body : " .. converttoletter(bt2 - BTV1)
-                    pp.Text = "Psychic : " .. converttoletter(pp2 - PPV1)
-                    speed.Text = "Speed : " .. converttoletter(speed2 - SPEEDV1)
-                    jump.Text = "Jump : " .. converttoletter(jump2 - JUMPV1)
-                    token.Text = "Token : " .. converttoletter(Token2 - Token1)
+                    Fist.Text = "Fist : " .. converttoletter(fs2 - FSV1)
+                    Body.Text = "Body : " .. converttoletter(bt2 - BTV1)
+                    Psychic.Text = "Psychic : " .. converttoletter(pp2 - PPV1)
+                    Speed.Text = "Speed : " .. converttoletter(speed2 - SPEEDV1)
+                    Jump.Text = "Jump : " .. converttoletter(jump2 - JUMPV1)
+                    Token.Text = "Token : " .. converttoletter(Token2 - Token1)
                 end
             end
         end
         coroutine.wrap(MSUSL_fake_script)()
+		CloseBut.MouseButton1Click:connect(function()
+            StatCounter:Destroy()
+        end)
     end
 })
 Tabs.Farm:AddButton({
@@ -1523,7 +1539,7 @@ Tabs.Farm:AddButton({
         MultiChecker.PlayerTextBox.Text = ""
         MultiChecker.PlayerTextBox.TextColor3 = Color3.fromRGB(255, 255, 255)
         MultiChecker.PlayerTextBox.TextScaled = true
-        MultiChecker.PlayerTextBox.TextSize = 14.000
+        MultiChecker.PlayerTextBox.TextSize = 16
         MultiChecker.PlayerTextBox.TextWrapped = true
         MultiChecker.PlayerTextBox.ClearTextOnFocus = true
         
