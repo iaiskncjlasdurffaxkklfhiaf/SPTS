@@ -17,7 +17,7 @@ for i, v in pairs(game:GetService('Players'):GetChildren()) do
 end
 
 game:GetService('Players').PlayerAdded:Connect(function()
-    wait()
+    task.wait()
     for i, v in pairs(game:GetService('Players'):GetChildren()) do
         if v ~= game.Players.LocalPlayer then
             for i2, v2 in pairs(v:GetChildren()) do
@@ -271,8 +271,6 @@ function getfs()
     end
 end
 
-
-
 function getpp()
     if game.Players.LocalPlayer.PrivateStats.PsychicPower.Value >= 1e15 then
         return "+PP6"
@@ -494,35 +492,6 @@ Toggls.js:OnChanged(function()
     end
 end)
 
-local RespBox = Tabs.Farm:AddSlider("Slider", {Title = "Respawn", Description = "", Default = 50, Min = 1, Max = 99, Rounding = 1,
-    Callback = function(Value)
-        settings['resp_hp'] = Value / 100
-    end
-})
-
-spawn(function()
-    while task.wait() do
-        pcall(function()
-            game:GetService("Players").LocalPlayer.PlayerGui.IntroGui.Enabled = false
-            game:GetService("Players").LocalPlayer.PlayerGui.ScreenGui.Enabled = true
-            game:GetService("Lighting").Blur.Enabled = false
-        end)
-    end
-end)
-
-game.Players.LocalPlayer.CharacterAdded:Connect(function(character)
-    character:WaitForChild('Humanoid'):GetPropertyChangedSignal('Health'):Connect(function()
-        if character:WaitForChild('Humanoid').MaxHealth * (settings['resp_hp']) > character:WaitForChild('Humanoid').Health then
-            game.ReplicatedStorage.RemoteEvent:FireServer({"Respawn"})
-            d = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
-            character:Destroy()
-            repeat task.wait(0) until workspace:FindFirstChild(game.Players.LocalPlayer.Name)
-            task.wait(0.5)
-            workspace[game.Players.LocalPlayer.Name].HumanoidRootPart.CFrame = d
-        end
-    end)
-end)
-
 Toggls.blaser:OnChanged(function()
     while Fluent.Options.U3.Value and task.wait(0) do
         pcall(function()
@@ -674,8 +643,7 @@ Toggls.sitfun:OnChanged(function()
             if targets[1] then
                 for i, v in next, targets do
                     game.Players.LocalPlayer.Character.Humanoid.Sit = true
-                    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame =
-                        workspace[targets[i]].Head.CFrame * CFrame.new(0, 2.5, 0)
+                    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = workspace[targets[i]].Head.CFrame * CFrame.new(0, 2.5, 0)
                 end
             end
         end)
@@ -687,8 +655,7 @@ Toggls.spamtp:OnChanged(function()
         pcall(function()
             if targets[1] then
                 for i, v in next, targets do
-                    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame =
-                        game.Players[targets[i]].Character.HumanoidRootPart.CFrame
+                    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Players[targets[i]].Character.HumanoidRootPart.CFrame
                 end
             end
         end)
@@ -700,16 +667,16 @@ Toggls.stackall:OnChanged(function()
         pcall(function()
             game:GetService("ReplicatedStorage").RemoteEvent:FireServer({"Skill_SpherePunch", Vector3.new(0, 9e20, 0)})
             for i, v in pairs(game.Players:GetPlayers()) do
-                coroutine.wrap(function()
+                spawn(function()
                     pcall(function()
                         if v ~= game.Players.LocalPlayer then
                             if v.PrivateStats.BodyToughness.Value <= game:GetService("Players").LocalPlayer.PrivateStats.FistStrength.Value * 2 then
                                 if v.Character.Humanoid.Health ~= 0 then
-                                    if not v.Character:FindFirstChild("SafeZoneShield") and not v.Character:FindFirstChild('ForceField') then
+                                    if not v.Character:FindFirstChild("SafeZoneShield", true) and not v.Character:FindFirstChild('ForceField', true) then
                                         v.Character.HumanoidRootPart.CFrame = CFrame.new(0, 1e5, 0)
-                                        for i, v in ipairs(game:GetService("Workspace").Storage:GetChildren()) do
-                                            if v.Name == "EnergySphere9" then
-                                                v.CFrame = CFrame.new(0, 1e5, 0)
+                                        for j, v2 in ipairs(game:GetService("Workspace").Storage:GetChildren()) do
+                                            if v2.Name == "EnergySphere9" then
+                                                v2.CFrame = CFrame.new(0, 1e5, 0)
                                             end
                                         end
                                     end
@@ -717,20 +684,19 @@ Toggls.stackall:OnChanged(function()
                             end
                         end
                     end)
-                end)()
+                end)
             end
         end)
     end
 end)
 
+
 Toggls.soulrall:OnChanged(function()
-    while Fluent.Options.P10.Value do
-        task.wait(0)
+    while Fluent.Options.P10.Value and task.wait(0) do
         pcall(function()
             for i, v in pairs(game.Players:GetPlayers()) do
-                local Random = game.Players:GetPlayers()[math.random(1, #game.Players:GetPlayers())]
-                if Random.PrivateStats.PsychicPower.Value <= game:GetService("Players").LocalPlayer.PrivateStats.PsychicPower.Value * 1000 then
-                    for i, v in pairs(game.Players:GetPlayers()) do
+                if v ~= game.Players.LocalPlayer then
+                    if v.PrivateStats.PsychicPower.Value <= game.Players.LocalPlayer.PrivateStats.PsychicPower.Value * 1000 then
                         game.ReplicatedStorage.RemoteEvent:FireServer({"Skill_SoulReap", game.Players[v.Name]})
                     end
                 end
@@ -740,14 +706,14 @@ Toggls.soulrall:OnChanged(function()
 end)
 
 Toggls.ppall:OnChanged(function()
-    while Fluent.Options.P11.Value do
-        task.wait(0)
+    while Fluent.Options.P11.Value and task.wait(0) do
         pcall(function()
             for i, v in pairs(game.Players:GetPlayers()) do
-                local Random = game.Players:GetPlayers()[math.random(1, #game.Players:GetPlayers())]
-                if Random.PrivateStats.PsychicPower.Value <= game:GetService("Players").LocalPlayer.PrivateStats.PsychicPower.Value * 100 then
-                    game.ReplicatedStorage.RemoteEvent:FireServer({"Skill_SoulAttack_Start", game.Players[v.Name]})
-                    game.ReplicatedStorage.RemoteEvent:FireServer({"Skill_SoulAttack_End"})
+                if v ~= game.Players.LocalPlayer then
+                    if v.PrivateStats.PsychicPower.Value <= game.Players.LocalPlayer.PrivateStats.PsychicPower.Value * 10 then
+                        game.ReplicatedStorage.RemoteEvent:FireServer({"Skill_SoulAttack_Start", game.Players[v.Name]})
+                        game.ReplicatedStorage.RemoteEvent:FireServer({"Skill_SoulAttack_End"})
+                    end
                 end
             end
         end)
@@ -861,7 +827,8 @@ end)
 
 --//Sliders
 local Sliders = {
-    fov = Tabs.Usual:AddSlider("Slider", {Title = "FOV", Description = "", Default = 70, Min = 1, Max = 120, Rounding = 1});
+    fov = Tabs.Usual:AddSlider("SU1", {Title = "FOV", Description = "", Default = 70, Min = 1, Max = 120, Rounding = 1});
+    resp = Tabs.Farm:AddSlider("SF1", {Title = "Respawn", Description = "", Default = 50, Min = 1, Max = 99, Rounding = 1});
 };
 
 --// functions sliders
@@ -870,6 +837,34 @@ Sliders.fov:OnChanged(function(fov)
     local Camera = workspace.CurrentCamera
     Camera.FieldOfView = FovNumber
 end)
+
+Sliders.resp:OnChanged(function(value)
+    settings['resp_hp'] = value / 100
+end)
+
+spawn(function()
+    while task.wait() do
+        pcall(function()
+            game:GetService("Players").LocalPlayer.PlayerGui.IntroGui.Enabled = false
+            game:GetService("Players").LocalPlayer.PlayerGui.ScreenGui.Enabled = true
+            game:GetService("Lighting").Blur.Enabled = false
+        end)
+    end
+end)
+
+game.Players.LocalPlayer.CharacterAdded:Connect(function(character)
+    character:WaitForChild('Humanoid'):GetPropertyChangedSignal('Health'):Connect(function()
+        if character:WaitForChild('Humanoid').MaxHealth * (settings['resp_hp']) > character:WaitForChild('Humanoid').Health then
+            d = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
+            game.ReplicatedStorage.RemoteEvent:FireServer({"Respawn"})
+            character:Destroy()
+            repeat task.wait(0) until workspace:FindFirstChild(game.Players.LocalPlayer.Name)
+            task.wait(0.5)
+            workspace[game.Players.LocalPlayer.Name].HumanoidRootPart.CFrame = d
+        end
+    end)
+end)
+
 
 --// functions buttons
 Tabs.Farm:AddButton({
@@ -1082,7 +1077,7 @@ Tabs.Farm:AddButton({
             --[[function CanAttack()
             local a0 = game:GetService("Players").LocalPlayer.PlayerScripts.MainScript;
             while stopQuest do
-            wait(0.01)
+            task.wait(0.01)
             getsenv(a0).TalkingOnQuest = false
             end
             end]]
@@ -1098,7 +1093,7 @@ Tabs.Farm:AddButton({
                     end
                 end)
         end)
-        repeat wait() until tostring(game:GetService("Players").LocalPlayer.PlayerGui.ScreenGui.QuestTalkBtn.AbsolutePosition) == '743.039978, 52.1999969'
+        repeat task.wait() until tostring(game:GetService("Players").LocalPlayer.PlayerGui.ScreenGui.QuestTalkBtn.AbsolutePosition) == '743.039978, 52.1999969'
         firesignal(game:GetService("Players").LocalPlayer.PlayerGui.ScreenGui.QuestTalkBtn.MouseButton1Click)
         task.wait(3)
         game:GetService("ReplicatedStorage").RemoteEvent:FireServer({"QuestTalkStart"})
@@ -2224,11 +2219,11 @@ local Keybind = Tabs.Settings:AddKeybind("Keybind", {
     Mode = "Toggle",
     Default = "F1",
     Callback = function()
-        local pos = game.Players.LocalPlayer.Character:GetPrimaryPartCFrame()
+        local pos = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
         game.ReplicatedStorage.RemoteEvent:FireServer({"Respawn"})
         game.Players.LocalPlayer.Character:Destroy()
         task.wait(1.7)
-        game.Players.LocalPlayer.Character:SetPrimaryPartCFrame(pos)
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = pos
     end
 })
 
@@ -2246,6 +2241,7 @@ InterfaceManager:BuildInterfaceSection(Tabs.Settings)
 
 if not getgenv().first then
     getgenv().first = true
+    
     function PlayerJoined(text)
         game:GetService("StarterGui"):SetCore("ChatMakeSystemMessage", {
             Text = text,
@@ -2254,7 +2250,7 @@ if not getgenv().first then
             TextSize = 20
         })
     end
-    
+
     function PlayerLeft(text)
         game:GetService("StarterGui"):SetCore("ChatMakeSystemMessage", {
             Text = text,
