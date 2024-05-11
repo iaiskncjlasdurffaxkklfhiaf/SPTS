@@ -995,7 +995,7 @@ Tabs.Farm:AddButton({
         CloseBut.Size = UDim2.new(0.1, 0, 0.15, 0)
         CloseBut.Active = false
         CloseBut.Text = "X"
-		CloseBut.TextColor3 = Color3.fromRGB(100, 100, 100)
+		CloseBut.TextColor3 = Color3.fromRGB(255,255,255)
 		CloseBut.TextSize = 24
 		CloseBut.Font = Enum.Font.GothamBlack
 		CloseBut.AutoButtonColor = false
