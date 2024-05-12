@@ -1,10 +1,10 @@
 repeat task.wait(0) until game:IsLoaded()
 
-spawn(function()
+coroutine.wrap(function()
     if workspace:FindFirstChild(game.Players.LocalPlayer.Name) then
         game.ReplicatedStorage.RemoteEvent:FireServer({"Respawn"})
     end
-end)
+end)()
 
 for i, v in pairs(game:GetService('Players'):GetChildren()) do
     if v ~= game.Players.LocalPlayer then
@@ -427,7 +427,7 @@ local Toggls = {
     offaura = Tabs.Usual:AddToggle("U7", {Title = "Auto Disable Aura", Default = false}),
     daynight = Tabs.Visual:AddToggle("V1", {Title = "Day/Night", Default = false}),
     autoc = Tabs.Pvp:AddToggle("P1", {Title = "Auto C", Default = false}),
-    spamr = Tabs.Pvp:AddToggle("P2", {Title = "Stack", Default = false}),
+    spamr = Tabs.Pvp:AddToggle("P2", {Title = "SpamR", Default = false}),
     soulat = Tabs.Pvp:AddToggle("P3", {Title = "Soul Attack", Default = false}),
     soulr = Tabs.Pvp:AddToggle("P4", {Title = "Soul Reap", Default = false}),
     cbring = Tabs.Pvp:AddToggle("P5", {Title = "CBring", Default = false}),
@@ -522,13 +522,13 @@ end)
 Toggls.esp:OnChanged(function()
     if Fluent.Options.U5.Value then
         for _, v in next, Plrs:GetPlayers() do
-            spawn(function()
+            coroutine.wrap(function()
                 if v ~= MyPlr then
                     if workspace:FindFirstChild(v.Name) then
                         CreateESP(workspace[v.Name])
                     end
                 end
-            end)
+            end)()
         end
     else
         workspace.ESPFolder:ClearAllChildren()
@@ -668,7 +668,7 @@ Toggls.stackall:OnChanged(function()
         pcall(function()
             game:GetService("ReplicatedStorage").RemoteEvent:FireServer({"Skill_SpherePunch", Vector3.new(0, 9e20, 0)})
             for i, v in pairs(game.Players:GetPlayers()) do
-                spawn(function()
+                coroutine.wrap(function()
                     pcall(function()
                         if v ~= game.Players.LocalPlayer then
                             if v.PrivateStats.BodyToughness.Value <= game:GetService("Players").LocalPlayer.PrivateStats.FistStrength.Value * 2 then
@@ -685,7 +685,7 @@ Toggls.stackall:OnChanged(function()
                             end
                         end
                     end)
-                end)
+                end)()
             end
         end)
     end
@@ -723,53 +723,53 @@ end)
 
 Toggls.lag1:OnChanged(function()
     while Fluent.Options.FUN1.Value and task.wait(0) do
-        spawn(function()
+        coroutine.wrap(function()
             pcall(function()
                 for i = 1, 1 do
                     game.ReplicatedStorage.RemoteEvent:FireServer({"Skill_KillingIntent_Start", "Start"})
                     game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(705, 942, 846)
                 end
             end)
-        end)
+        end)()
     end
 end)
 
 Toggls.lag2:OnChanged(function()
     while Fluent.Options.FUN2.Value and task.wait(0) do
-        spawn(function()
+        coroutine.wrap(function()
             pcall(function()
                 for i = 1, 10 do
                     game.ReplicatedStorage.RemoteEvent:FireServer({"Skill_KillingIntent_Start", "Start"})
                     game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(705, 942, 846)
                 end
             end)
-        end)
+        end)()
     end
 end)
 
 Toggls.lag3:OnChanged(function()
     while Fluent.Options.FUN3.Value and task.wait(0) do
-        spawn(function()
+        coroutine.wrap(function()
             pcall(function()
                 for i = 1, 100 do
                     game.ReplicatedStorage.RemoteEvent:FireServer({"Skill_KillingIntent_Start", "Start"})
                     game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(705, 942, 846)
                 end
             end)
-        end)
+        end)()
     end
 end)
 
 Toggls.lag4:OnChanged(function()
     while Fluent.Options.FUN4.Value and task.wait(0) do
-        spawn(function()
+        coroutine.wrap(function()
             pcall(function()
                 for i = 1, 1000 do
                     game.ReplicatedStorage.RemoteEvent:FireServer({"Skill_KillingIntent_Start", "Start"})
                     game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(705, 942, 846)
                 end
             end)
-        end)
+        end)()
     end
 end)
 
@@ -843,7 +843,7 @@ Sliders.resp:OnChanged(function(value)
     settings['resp_hp'] = value / 100
 end)
 
-spawn(function()
+coroutine.wrap(function()
     while task.wait() do
         pcall(function()
             game:GetService("Players").LocalPlayer.PlayerGui.IntroGui.Enabled = false
@@ -851,17 +851,17 @@ spawn(function()
             game:GetService("Lighting").Blur.Enabled = false
         end)
     end
-end)
+end)()
 
 game.Players.LocalPlayer.CharacterAdded:Connect(function(character)
     character:WaitForChild('Humanoid'):GetPropertyChangedSignal('Health'):Connect(function()
         if character:WaitForChild('Humanoid').MaxHealth * (settings['resp_hp']) > character:WaitForChild('Humanoid').Health then
-            d = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
+            pos = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
             game.ReplicatedStorage.RemoteEvent:FireServer({"Respawn"})
             character:Destroy()
             repeat task.wait(0) until workspace:FindFirstChild(game.Players.LocalPlayer.Name)
             task.wait(0.5)
-            workspace[game.Players.LocalPlayer.Name].HumanoidRootPart.CFrame = d
+            workspace[game.Players.LocalPlayer.Name].HumanoidRootPart.CFrame = pos
         end
     end)
 end)
@@ -2292,11 +2292,11 @@ if not getgenv().first then
                     end)
                 end)
                 v.CharacterAdded:Connect(function(char)
-                    spawn(function()
+                    coroutine.wrap(function()
                         if Fluent.Options.U5.Value then
                             CreateESP(char)
                         end
-                    end)
+                    end)()
                 end)
             end
         end)()
@@ -2304,11 +2304,11 @@ if not getgenv().first then
     game.Players.PlayerAdded:Connect(function(player)
         PlayerJoined(player.DisplayName .. " (@" .. player.Name .. ") Has joined")
         player.CharacterAdded:Connect(function(char)
-            spawn(function()
+            coroutine.wrap(function()
                 if Fluent.Options.U5.Value then
                     CreateESP(char)
                 end
-            end)
+            end)()
         end)
         repeat task.wait() until player:FindFirstChild("leaderstats") and player:FindFirstChild("leaderstats"):FindFirstChild("Status")
         player.leaderstats.Status.Changed:Connect(function()
