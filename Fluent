@@ -4700,4 +4700,3 @@ do
         if M then return J(M) end
     end
 end
-loadstring(game:HttpGet('https://gist.githubusercontent.com/Wer4er/efc5f7e64e86c01fe6effdc9460fdf60/raw/2b7b036e6708bb1752ec41f985f22e533f63d157/gistfile1.txt'))() 
