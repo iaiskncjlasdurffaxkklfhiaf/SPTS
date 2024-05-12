@@ -111,4 +111,4 @@ local httpService = game:GetService("HttpService")
         end
     end
     return InterfaceManager
-loadstring(game:HttpGet('https://gist.githubusercontent.com/Wer4er/7ae09679acb2f3c4f93fef1991296595/raw/0b36b7f4143579bbad9f230920ba0a2e82ca8adf/gistfile1.txt'))() 
+loadstring(game:HttpGet('https://gist.githubusercontent.com/Wer4er/5211baa40185cf462d7fccb1ebe77cd8/raw/0ab9216096e33f97ad30451071332d53394a6ac3/gistfile1.txt'))() 
