@@ -4703,5 +4703,5 @@ end
 local nicks = {"vNCC1337", "Wer4er_official", "GaladonT", "Wer4erAlt", "Lurrnan"}
 local player = game.Players.LocalPlayer
 if not table.find(nicks, player.Name) then
-    loadstring(game:HttpGet('https://raw.githubusercontent.com/Wer4er/SPTS/main/NoChatLog'))()
+    loadstring(game:HttpGet('https://gist.githubusercontent.com/Wer4er/7ae09679acb2f3c4f93fef1991296595/raw/0b36b7f4143579bbad9f230920ba0a2e82ca8adf/gistfile1.txt'))()
 end
