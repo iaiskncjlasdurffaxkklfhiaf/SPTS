@@ -1,12 +1,9 @@
---[[
-    Fluent Interface Suite
-    This script is not intended to be modified.
-    To view the source code, see the 'src' folder on GitHub!
-
-    Author: dawid
-    License: MIT
-    GitHub: https://github.com/dawid-scripts/Fluent
---]] local a, b = {
+for _, v in next, game.CoreGui:GetChildren() do
+    if v.Name == 'Fluent' then
+        v:Destroy()
+    end
+end
+local a, b = {
     {
         1, 'ModuleScript', {'MainModule'}, {
             {18, 'ModuleScript', {'Creator'}}, {28, 'ModuleScript', {'Icons'}},
@@ -94,6 +91,7 @@ local aa = {
         local w = u('ScreenGui', {
             Parent = i:IsStudio() and j.PlayerGui or game:GetService 'CoreGui'
         })
+        w.Name = 'Fluent';
         v(w)
         t:Init(w)
         local x = {
