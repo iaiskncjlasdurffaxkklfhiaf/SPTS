@@ -1,9 +1,12 @@
-for _, v in next, game.CoreGui:GetChildren() do
-    if v.Name == 'Fluent' then
-        v:Destroy()
-    end
-end
-local a, b = {
+--[[
+    Fluent Interface Suite
+    This script is not intended to be modified.
+    To view the source code, see the 'src' folder on GitHub!
+
+    Author: dawid
+    License: MIT
+    GitHub: https://github.com/dawid-scripts/Fluent
+--]] local a, b = {
     {
         1, 'ModuleScript', {'MainModule'}, {
             {18, 'ModuleScript', {'Creator'}}, {28, 'ModuleScript', {'Icons'}},
@@ -89,10 +92,8 @@ local aa = {
         local t, u, v = e(s.Notification), p.New, protectgui or
                             (syn and syn.protect_gui) or function() end
         local w = u('ScreenGui', {
-            Parent = i:IsStudio() and j.PlayerGui or
-                game.CoreGui
+            Parent = i:IsStudio() and j.PlayerGui or game:GetService 'CoreGui'
         })
-        w.Name = 'Fluent';
         v(w)
         t:Init(w)
         local x = {
@@ -4524,14 +4525,8 @@ do
             return A
         end,
         FindFirstChild = function(y, z)
-            if not z then 
-                ad('Argument 1 missing or nil', 2) 
-            end
-            for A in ag, x[y] do 
-                if A.Name == z then 
-                    return A 
-                end 
-            end
+            if not z then ad('Argument 1 missing or nil', 2) end
+            for A in ag, x[y] do if A.Name == z then return A end end
             return
         end,
         GetFullName = function(y)
