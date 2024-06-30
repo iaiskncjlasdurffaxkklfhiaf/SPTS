@@ -194,6 +194,11 @@ local aa = {
         function x.Destroy(C)
             if x.Window then
                 x.Unloaded = true
+                if x.Dropdowns then
+                    for _, v in next, x.Dropdowns do
+                        v:Destroy()
+                    end
+                end
                 if x.UseAcrylic then
                     x.Window.AcrylicPaint.Model:Destroy()
                 end
@@ -201,6 +206,7 @@ local aa = {
                 x.GUI:Destroy()
             end
         end
+        
         function x.ToggleAcrylic(C, D)
             if x.Window then
                 if x.UseAcrylic then
