@@ -1508,9 +1508,19 @@ local aa = {
                     'Keybind' and not h:GetFocusedTextBox() then
                     if M.KeyCode.Name == u.MinimizeKeybind.Value then
                         v:Minimize()
+                        if x.Dropdowns then
+                            for _, v in next, x.Dropdowns do
+                                v.Visible = false
+                            end
+                        end
                     end
                 elseif M.KeyCode == u.MinimizeKey and not h:GetFocusedTextBox() then
                     v:Minimize()
+                    if x.Dropdowns then
+                        for _, v in next, x.Dropdowns do
+                            v.Visible = false
+                        end
+                    end
                 end
             end)
             function v.Minimize(M)
