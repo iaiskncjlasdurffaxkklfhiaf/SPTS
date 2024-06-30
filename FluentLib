@@ -1509,16 +1509,16 @@ local aa = {
                     if M.KeyCode.Name == u.MinimizeKeybind.Value then
                         v:Minimize()
                         if v.Dropdowns then
-                            for _, v in next, v.Dropdowns do
-                                v.Visible:Destroy()
+                            for _, v2 in next, v.Dropdowns do
+                                v2:Destroy()
                             end
                         end
                     end
                 elseif M.KeyCode == u.MinimizeKey and not h:GetFocusedTextBox() then
                     v:Minimize()
                     if v.Dropdowns then
-                        for _, v in next, v.Dropdowns do
-                            v.Visible:Destroy()
+                        for _, v2 in next, v.Dropdowns do
+                            v2:Destroy()
                         end
                     end
                 end
