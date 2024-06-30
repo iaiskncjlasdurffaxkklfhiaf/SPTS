@@ -1,7 +1,5 @@
 for _, v in next, game.CoreGui:GetChildren() do
-    if v.Name == 'Fluent' then
-        v:Destroy()
-    end
+    if v.Name == 'Fluent' then v:Destroy() end
 end
 local a, b = {
     {
@@ -22,7 +20,7 @@ local a, b = {
                     {58, 'ModuleScript', {'Vibrant'}},
                     {59, 'ModuleScript', {'OceanBlue'}},
                     {60, 'ModuleScript', {'SunsetOrange'}},
-                    {61, 'ModuleScript', {'ForestGreen'}},
+                    {61, 'ModuleScript', {'ForestGreen'}}
                 }
             }, {
                 19, 'ModuleScript', {'Elements'}, {
@@ -155,7 +153,7 @@ local aa = {
         local z = {}
         z.__index = z
         z.__namecall = function(A, B, ...) return z[B](...) end
-        for A, B in ipairs(q) do
+        for A, B in next, q do
             z['Add' .. B.__type] = function(C, D, E)
                 B.Container = C.Container
                 B.Type = C.Type
@@ -206,7 +204,7 @@ local aa = {
                 x.GUI:Destroy()
             end
         end
-        
+
         function x.ToggleAcrylic(C, D)
             if x.Window then
                 if x.UseAcrylic then
@@ -244,11 +242,11 @@ local aa = {
             i.NearIntensity = 1
             local j = {}
             function h.Enable()
-                for k, l in pairs(j) do l.Enabled = false end
+                for k, l in next, j do l.Enabled = false end
                 i.Parent = game:GetService 'Lighting'
             end
             function h.Disable()
-                for k, l in pairs(j) do l.Enabled = l.enabled end
+                for k, l in next, j do l.Enabled = l.enabled end
                 i.Parent = nil
             end
             local k = function()
@@ -257,12 +255,12 @@ local aa = {
                         j[k] = {enabled = k.Enabled}
                     end
                 end
-                for l, m in pairs(game:GetService 'Lighting':GetChildren()) do
+                for l, m in next, game:GetService 'Lighting':GetChildren() do
                     k(m)
                 end
                 if game:GetService 'Workspace'.CurrentCamera then
-                    for n, o in pairs(
-                                    game:GetService 'Workspace'.CurrentCamera:GetChildren()) do
+                    for n, o in next,
+                                game:GetService 'Workspace'.CurrentCamera:GetChildren() do
                         k(o)
                     end
                 end
@@ -3842,13 +3840,13 @@ local aa = {
             end
             e._complete = true
             e._motors = {}
-            for f, g in pairs(c) do e._motors[f] = aj(g) end
+            for f, g in next, c do e._motors[f] = aj(g) end
             return e
         end
         function ai.step(c, d)
             if c._complete then return true end
             local e = true
-            for f, g in pairs(c._motors) do
+            for f, g in next, c._motors do
                 local h = g:step(d)
                 if not h then e = false end
             end
@@ -3865,7 +3863,7 @@ local aa = {
                    [[goals contains disallowed property "step". Did you mean to put a table of goals here?]])
             c._complete = false
             c._onStart:fire()
-            for e, f in pairs(d) do
+            for e, f in next, d do
                 local g = assert(c._motors[e],
                                  ('Unknown motor for key %s'):format(e))
                 g:setGoal(f)
@@ -3874,7 +3872,7 @@ local aa = {
         end
         function ai.getValue(c)
             local d = {}
-            for e, f in pairs(c._motors) do d[e] = f:getValue() end
+            for e, f in next, c._motors do d[e] = f:getValue() end
             return d
         end
         function ai.__tostring(c) return 'Motor(Group)' end
@@ -4022,7 +4020,7 @@ local aa = {
         function af.disconnect(ag)
             if ag.connected then
                 ag.connected = false
-                for ah, ai in pairs(ag.signal._connections) do
+                for ah, ai in next, ag.signal._connections do
                     if ai == ag then
                         table.remove(ag.signal._connections, ah)
                         return
@@ -4036,10 +4034,8 @@ local aa = {
             return setmetatable({_connections = {}, _threads = {}}, ag)
         end
         function ag.fire(ah, ...)
-            for ai, aj in pairs(ah._connections) do aj._handler(...) end
-            for c, d in pairs(ah._threads) do
-                coroutine.resume(d, ...)
-            end
+            for ai, aj in next, ah._connections do aj._handler(...) end
+            for c, d in next, ah._threads do coroutine.resume(d, ...) end
             ah._threads = {}
         end
         function ag.connect(ah, aj)
@@ -4265,7 +4261,11 @@ local aa = {
     [47] = function()
         local aa, ab, ac, ad, ae = b(47)
         local af = {
-            Names = {'Dark', 'Darker', 'Light', 'Aqua', 'Amethyst', 'Rose', 'NeonDark', 'PastelLight', 'Retro', 'GoldNight', 'Vibrant','OceanBlue','SunsetOrange','ForestGreen'}
+            Names = {
+                'Dark', 'Darker', 'Light', 'Aqua', 'Amethyst', 'Rose',
+                'NeonDark', 'PastelLight', 'Retro', 'GoldNight', 'Vibrant',
+                'OceanBlue', 'SunsetOrange', 'ForestGreen'
+            }
         }
         for ag, ah in next, ab:GetChildren() do
             local aj = ac(ah)
@@ -4802,7 +4802,7 @@ local aa = {
             AcrylicMain = Color3.fromRGB(20, 40, 20),
             AcrylicBorder = Color3.fromRGB(30, 60, 30),
             AcrylicGradient = ColorSequence.new(Color3.fromRGB(50, 205, 50),
-                                Color3.fromRGB(30, 130, 30)),
+                                                Color3.fromRGB(30, 130, 30)),
             AcrylicNoise = 0.9,
             TitleBarLine = Color3.fromRGB(60, 179, 113),
             Tab = Color3.fromRGB(70, 130, 180),
@@ -4834,7 +4834,7 @@ local aa = {
             Hover = Color3.fromRGB(90, 210, 140),
             HoverChange = 0.04
         }
-    end            
+    end
 }
 do
     local ab, ac, ad, ae, af, ag, ah, aj, c, e, f, g, h, i, j, k = task,
