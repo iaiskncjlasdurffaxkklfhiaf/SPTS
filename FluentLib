@@ -192,11 +192,6 @@ local aa = {
         function x.Destroy(C)
             if x.Window then
                 x.Unloaded = true
-                if x.Dropdowns then
-                    for _, v in next, x.Dropdowns do
-                        v:Destroy()
-                    end
-                end
                 if x.UseAcrylic then
                     x.Window.AcrylicPaint.Model:Destroy()
                 end
@@ -861,14 +856,7 @@ local aa = {
                 r.Root.Position = UDim2.new(t.Scale, t.Offset, 0, 0)
             end)
             j.AddSignal(r.CloseButton.MouseButton1Click,
-                        function() 
-                            r:Close() 
-                            if x.Dropdowns then
-                                for _, v in next, x.Dropdowns do
-                                    v.Visible = false
-                                end
-                            end
-                        end)
+                        function() r:Close() end)
             function r.Open(t)
                 local u = r.LabelHolder.AbsoluteSize.Y
                 r.Holder.Size = UDim2.new(1, 0, 0, 58 + u)
@@ -876,11 +864,6 @@ local aa = {
                     Scale = l(0, {frequency = 5}),
                     Offset = l(0, {frequency = 5})
                 }
-                if x.Dropdowns then
-                    for _, v in next, x.Dropdowns do
-                        v.Visible = true
-                    end
-                end
             end
             function r.Close(t)
                 if not r.Closed then
