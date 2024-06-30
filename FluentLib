@@ -874,6 +874,11 @@ local aa = {
                 if not r.Closed then
                     r.Closed = true
                     task.spawn(function()
+                        if x.Dropdowns then
+                            for _, v in next, x.Dropdowns do
+                                v.Visible = false
+                            end
+                        end
                         s:setGoal{
                             Scale = l(1, {frequency = 5}),
                             Offset = l(60, {frequency = 5})
