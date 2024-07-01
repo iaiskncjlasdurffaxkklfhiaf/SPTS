@@ -1,129 +1,114 @@
-local HttpService = game:GetService("HttpService")
+local httpService = game:GetService("HttpService")
 
-local InterfaceManager = {}
-InterfaceManager.__index = InterfaceManager
-
-function InterfaceManager.new(folder)
-    local self = setmetatable({}, InterfaceManager)
-    self.Folder = folder or "FluentSettings"
-    self.Settings = {
+local InterfaceManager = {} do
+	InterfaceManager.Folder = "FluentSettings"
+    InterfaceManager.Settings = {
         Theme = "Dark",
         Acrylic = true,
         Transparency = true,
         MenuKeybind = "LeftControl"
     }
-    self:BuildFolderTree() -- Initialize folder structure upon creation
-    return self
-end
 
-function InterfaceManager:SetFolder(folder)
-    self.Folder = folder
-    self:BuildFolderTree()
-end
+    function InterfaceManager:SetFolder(folder)
+		self.Folder = folder;
+		self:BuildFolderTree()
+	end
 
-function InterfaceManager:SetLibrary(library)
-    self.Library = library
-end
+    function InterfaceManager:SetLibrary(library)
+		self.Library = library
+	end
 
-function InterfaceManager:BuildFolderTree()
-    local function createDirectory(path)
-        if not isfolder(path) then
-            makefolder(path)
-        end
+    function InterfaceManager:BuildFolderTree()
+		local paths = {}
+
+		local parts = self.Folder:split("/")
+		for idx = 1, #parts do
+			paths[#paths + 1] = table.concat(parts, "/", 1, idx)
+		end
+
+		table.insert(paths, self.Folder)
+		table.insert(paths, self.Folder .. "/settings")
+
+		for i = 1, #paths do
+			local str = paths[i]
+			if not isfolder(str) then
+				makefolder(str)
+			end
+		end
+	end
+
+    function InterfaceManager:SaveSettings()
+        writefile(self.Folder .. "/options.json", httpService:JSONEncode(InterfaceManager.Settings))
     end
 
-    local parts = self.Folder:split("/")
-    local currentPath = ""
-    for _, part in ipairs(parts) do
-        currentPath = currentPath.. "/".. part
-        createDirectory(currentPath)
-    end
+    function InterfaceManager:LoadSettings()
+        local path = self.Folder .. "/options.json"
+        if isfile(path) then
+            local data = readfile(path)
+            local success, decoded = pcall(httpService.JSONDecode, httpService, data)
 
-    createDirectory(self.Folder.. "/settings") -- Ensure settings directory exists
-end
-
-function InterfaceManager:SaveSettings()
-    local success, errorMessage = pcall(function()
-        writefile(self.Folder.. "/options.json", HttpService:JSONEncode(self.Settings))
-    end)
-
-    if not success then
-        warn("Failed to save settings:", errorMessage)
-    end
-end
-
-function InterfaceManager:LoadSettings()
-    local path = self.Folder.. "/options.json"
-    if isfile(path) then
-        local success, data = pcall(readfile, path)
-        if success then
-            local success, decoded = pcall(HttpService.JSONDecode, HttpService, data)
             if success then
-                for k, v in pairs(decoded) do
-                    self.Settings[k] = v
+                for i, v in next, decoded do
+                    InterfaceManager.Settings[i] = v
                 end
-            else
-                warn("Failed to decode settings:", decoded)
             end
-        else
-            warn("Failed to read settings file:", data)
         end
     end
-end
 
-function InterfaceManager:BuildInterfaceSection(tab)
-    assert(self.Library, "Must set InterfaceManager.Library before building interface section.")
-    local Library = self.Library
-    local Settings = self.Settings
+    function InterfaceManager:BuildInterfaceSection(tab)
+        assert(self.Library, "Must set InterfaceManager.Library")
+		local Library = self.Library
+        local Settings = InterfaceManager.Settings
 
-    self:LoadSettings() -- Load settings at the start to ensure they are up-to-date
+        InterfaceManager:LoadSettings()
 
-    local section = tab:AddSection("Interface")
+		local section = tab:AddSection("Interface")
 
-    local InterfaceTheme = section:AddDropdown("InterfaceTheme", {
-        Title = "Theme",
-        Description = "Changes the interface theme.",
-        Values = Library.Themes,
-        Default = Settings.Theme,
-        Callback = function(Value)
-            Library:SetTheme(Value)
-            Settings.Theme = Value
-            self:SaveSettings()
-        end
-    })
+		local InterfaceTheme = section:AddDropdown("InterfaceTheme", {
+			Title = "Theme",
+			Description = "Changes the interface theme.",
+			Values = Library.Themes,
+			Default = Settings.Theme,
+			Callback = function(Value)
+				Library:SetTheme(Value)
+                Settings.Theme = Value
+                InterfaceManager:SaveSettings()
+			end
+		})
 
-    InterfaceTheme:SetValue(Settings.Theme)
-
-    if Library.UseAcrylic then
-        section:AddToggle("AcrylicToggle", {
-            Title = "Acrylic",
-            Description = "The blurred background requires graphic quality 8+",
-            Default = Settings.Acrylic,
-            Callback = function(Value)
-                Library:ToggleAcrylic(Value)
-                Settings.Acrylic = Value
-                self:SaveSettings()
-            end
-        })
+        InterfaceTheme:SetValue(Settings.Theme)
+	
+		if Library.UseAcrylic then
+			section:AddToggle("AcrylicToggle", {
+				Title = "Acrylic",
+				Description = "The blurred background requires graphic quality 8+",
+				Default = Settings.Acrylic,
+				Callback = function(Value)
+					Library:ToggleAcrylic(Value)
+                    Settings.Acrylic = Value
+                    InterfaceManager:SaveSettings()
+				end
+			})
+		end
+	
+		section:AddToggle("TransparentToggle", {
+			Title = "Transparency",
+			Description = "Makes the interface transparent.",
+			Default = Settings.Transparency,
+			Callback = function(Value)
+				Library:ToggleTransparency(Value)
+				Settings.Transparency = Value
+                InterfaceManager:SaveSettings()
+			end
+		})
+	
+		local MenuKeybind = section:AddKeybind("MenuKeybind", { Title = "Minimize Bind", Default = Settings.MenuKeybind })
+		MenuKeybind:OnChanged(function()
+			Settings.MenuKeybind = MenuKeybind.Value
+            InterfaceManager:SaveSettings()
+		end)
+		Library.MinimizeKeybind = MenuKeybind
     end
-
-    section:AddToggle("TransparentToggle", {
-        Title = "Transparency",
-        Description = "Makes the interface transparent.",
-        Default = Settings.Transparency,
-        Callback = function(Value)
-            Library:ToggleTransparency(Value)
-            Settings.Transparency = Value
-            self:SaveSettings()
-        end
-    })
-
-    local MenuKeybind = section:AddKeybind("MenuKeybind", {Title = "Minimize Bind", Default = Settings.MenuKeybind})
-    MenuKeybind:OnChanged(function()
-        Settings.MenuKeybind = MenuKeybind.Value
-        self:SaveSettings()
-    end)
-    Library.MinimizeKeybind = MenuKeybind
 end
 
 return InterfaceManager
